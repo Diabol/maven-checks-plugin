@@ -1,0 +1,2 @@
+maven-checks-plugin
+===================
