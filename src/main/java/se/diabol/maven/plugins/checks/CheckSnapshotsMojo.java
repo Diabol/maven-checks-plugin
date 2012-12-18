@@ -12,10 +12,11 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.path.PathTranslator;
 import org.codehaus.plexus.context.Context;
 import org.codehaus.plexus.context.ContextException;
+import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 
 @Mojo(name = "check-snapshots", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true,
         requiresDependencyResolution = ResolutionScope.TEST)
-public class CheckSnapshotsMojo extends AbstractMojo {
+public class CheckSnapshotsMojo extends AbstractMojo implements Contextualizable {
 
     private EnforceMojo enforce = new EnforceMojo();
 
@@ -42,13 +43,13 @@ public class CheckSnapshotsMojo extends AbstractMojo {
     /**
      * Flag to fail the build if a version check fails.
      */
-    @Parameter(property = "enforcer.fail", defaultValue = "true")
+    @Parameter(property = "checks.fail", defaultValue = "true")
     protected boolean fail = true;
 
     /**
      * Fail on the first rule that doesn't pass
      */
-    @Parameter(property = "enforcer.failFast", defaultValue = "false")
+    @Parameter(property = "checks.failFast", defaultValue = "false")
     protected boolean failFast = false;
 
     public void contextualize(Context context)
